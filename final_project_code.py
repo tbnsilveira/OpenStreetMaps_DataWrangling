@@ -167,8 +167,9 @@ def is_street_name(address_key):
 
 #%% Fixing cities names
 def audit_city_name(city_name):
-    """Return matched postal code and add bad ones to list."""
+    city_name = city_name.lower()    
     if city_name in expected_cities:
+        #print(city_name)
         return city_name
     else:
         return update_city(city_name, mapping_cities)
@@ -251,10 +252,10 @@ def shape_element(element):
                 if len(address) == 2:
                     if 'address' not in node:
                         node['address'] = {}
-                    if is_street_name(k):
-                        v = audit_street_type(v)
                     if is_city_name(k):
                         v = audit_city_name(v)
+                    if is_street_name(k):
+                        v = audit_street_type(v)
                     if is_postal_code(k):
                         v = audit_postal_code(v)
                     node['address'][address[1]] = v
@@ -291,6 +292,7 @@ def process_map(file_in, pretty=False):
 
         # Keep track of things
         print('Fixed street names:', fixed_street_names)
+        print('Fixed cities names:', fixed_city_names)
         print('Bad postal code:', bad_postal_codes)
 
     return data
