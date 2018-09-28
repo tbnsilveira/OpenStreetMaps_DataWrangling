@@ -149,7 +149,6 @@ def audit_street_type(street_name):
         street_type = match.group()
         if street_type not in expected:
             return update_street_name(street_name, street_mapping)
-    # TODO: rather None/null or a bad street name?
     return street_name
 
 
@@ -175,7 +174,7 @@ def audit_city_name(city_name):
         return update_city(city_name, mapping_cities)
         
 def update_city(city_name, mapping_cities):
-    """Replace and return new name from street name mapping."""
+    """Replace and return new name from cities name mapping."""
     for key in mapping_cities.keys():
         if re.search(key, city_name):
             city_name = re.sub(key, mapping_cities[key], city_name)
@@ -198,7 +197,7 @@ def audit_postal_code(postal_code):
 #    return (elem.attrib['k'] == "addr:postcode")
         
 def update_cep(cep, mapping):
-    """Replace and return new name from street name mapping."""
+    """Replace and return new postcode from mapping."""
     for key in mapping.keys():
         if re.search(key, cep):
             cep = re.sub(key, mapping[key], cep)
@@ -277,7 +276,7 @@ def shape_element(element):
 
 
 def process_map(file_in, pretty=False):
-    # You do not need to change this file
+    # Available from Udacity's repository
     file_out = "{0}.json".format(file_in)
     data = []
     with codecs.open(file_out, "w") as fo:
