@@ -16,7 +16,10 @@ Although today there are 46 municipalities composing this region, in the early e
 ## Getting data:
 The data was obtained from ... 
 
-After downloading the data, the first step I should do if I did not know the data model would be a simple "less" shell command to figure out what kind of data were in it. Since OpenStreetMaps provides us with a data model, we can move forward to the next step: auditing data.  
+After downloading the data, the first step I should do if I did not know the data model would be a simple "less" shell command to figure out what kind of data were in it. Since OpenStreetMaps provides us with a data model, which in turn tells us the information 
+
+we can move forward to the next step: auditing data. 
+
 
 
 ## Auditing data:  
@@ -31,6 +34,20 @@ B. Qualitative aspects:
 - Are there abbreviations?
 - Are the postal codes consistent?  
 
+It must be said that the data were first explored through the code in "exploringData.py", which involved an iterative process. After it, the code were adjusted in the "finalData.py", in order to export the data in the specified model to a MongoDB collection. 
+
+### Quantitative aspects:  
+My first issue from this category was to identify how many cities were collected, which I've done using the "audit_cities()" command. 
+
+
+---------------------------
+USAR: a informação da chave key:addr está disponível em
+https://wiki.openstreetmap.org/wiki/Key:addr
+
+---------------------------
+
+
+
 
 
 
@@ -39,3 +56,7 @@ B. Qualitative aspects:
 [2] https://en.wikipedia.org/wiki/Spanish_missions_in_South_America
 [3] https://jasonicarter.github.io/openstreetmap-data-wrangling-mongodb/
 [4] https://eberlitz.github.io/2015/09/18/data-wrangle-openstreetmaps-data/
+
+
+
+
