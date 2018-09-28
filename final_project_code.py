@@ -165,6 +165,25 @@ def update_street_name(name, mapping):
 def is_street_name(address_key):
     return address_key == 'addr:street'
 
+#%% Fixing cities names
+def audit_city_name(city_name):
+    """Return matched postal code and add bad ones to list."""
+    if city_name in expected_cities:
+        return city_name
+    else:
+        return update_city(city_name, mapping_cities)
+        
+def update_city(city_name, mapping_cities):
+    """Replace and return new name from street name mapping."""
+    for key in mapping_cities.keys():
+        if re.search(key, city_name):
+            city_name = re.sub(key, mapping_cities[key], city_name)
+            fixed_city_names.append(city_name)
+    return city_name
+
+def is_city_name(city_name):
+    return city_name == 'addr:city'
+
 #%% Fixing postal codes
 def audit_postal_code(postal_code):
     """Return matched postal code and add bad ones to list."""
@@ -234,8 +253,8 @@ def shape_element(element):
                         node['address'] = {}
                     if is_street_name(k):
                         v = audit_street_type(v)
-#                    if is_city_name(k):
-#                        v = audit_city_name(v)
+                    if is_city_name(k):
+                        v = audit_city_name(v)
                     if is_postal_code(k):
                         v = audit_postal_code(v)
                     node['address'][address[1]] = v
